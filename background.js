@@ -61,9 +61,10 @@ async function copyToClipboard(text, tabId) {
 }
 
 /**
- * Handles the extension icon click action
+ * Main action handler for sharing a URL
+ * @param {chrome.tabs.Tab} tab - The tab to share from
  */
-chrome.action.onClicked.addListener(async (tab) => {
+async function handleShareAction(tab) {
     // Get the current tab's URL
     const currentUrl = tab.url;
 
@@ -109,4 +110,9 @@ chrome.action.onClicked.addListener(async (tab) => {
     } catch (error) {
         console.error('Aegis Quick Share: Error during share action', error);
     }
-});
+}
+
+/**
+ * Handles the extension icon click action
+ */
+chrome.action.onClicked.addListener(handleShareAction);
